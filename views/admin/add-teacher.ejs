@@ -1,0 +1,81 @@
+
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<style>
+    /* Custom styles */
+    body {
+
+        align-items: center;
+        height: 100vh;
+        background-color: #f3f4f6;
+        margin: 0;
+    }
+    .back-button-container {
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        z-index: 1000;
+    }
+    .back-button {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        background-color: #024002; /* Tailwind's blue-500 */
+        color: white;
+        border-radius: 0.375rem; /* Tailwind's rounded-md */
+        text-align: center;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    .back-button:hover {
+        background-color: #063f00; /* Tailwind's blue-600 */
+    }
+</style>
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+<body>
+    <div class="back-button-container">
+        <button class="back-button" onclick="goBack()">Go Back</button>
+    </div>
+<div class="max-w-lg mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
+    <h2 class="text-2xl font-bold mb-4">Add Teacher</h2>
+    <form action="/teacher/register" method="POST" class="space-y-4">
+        <div>
+            <label for="name" class="block text-gray-700">Name:</label>
+            <input type="text" id="name" name="name" required
+                class="w-full p-2 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-green-900 focus:border-green-900">
+        </div>
+        <div>
+            <label for="department" class="block text-gray-700">Department:</label>
+            <input type="text" id="department" name="department" required
+                class="w-full p-2 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-green-900 focus:border-green-900">
+        </div>
+        <div>
+            <label for="subject" class="block text-gray-700">Subject:</label>
+            <input type="text" id="subject" name="subject" required
+                class="w-full p-2 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-green-900 focus:border-green-900">
+        </div>
+        <div>
+            <label for="email" class="block text-gray-700">Email:</label>
+            <input type="email" id="email" name="email" required
+                class="w-full p-2 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-green-900 focus:border-green-900">
+        </div>
+        <div>
+            <label for="password" class="block text-gray-700">Password:</label>
+            <input type="password" id="password" name="password" required
+                class="w-full p-2 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-green-900 focus:border-green-900">
+        </div>
+        <div>
+            <button type="submit"
+                class="w-full bg-green-900 hover:bg-green-900 text-white py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-green-900 focus:ring-opacity-50">
+                Register
+            </button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

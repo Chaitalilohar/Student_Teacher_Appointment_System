@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book an Appointment</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Custom styles */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 20px; /* Ensure some padding on mobile */
+        }
+        .back-button {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: #01380e; /* Tailwind's blue-500 */
+            color: white;
+            border-radius: 0.375rem; /* Tailwind's rounded-md */
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .back-button:hover {
+            background-color: #035403; /* Tailwind's blue-600 */
+        }
+    </style>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</head>
+<body>
+    <div class="max-w-lg w-full bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
+        <div class="flex justify-end">
+            <button class="back-button" onclick="goBack()">Go Back</button>
+        </div>
+        <h2 class="text-3xl font-bold mb-6 text-center">Book an Appointment</h2>
+
+        <!-- Appointment Form -->
+        <form action="/student/book-appointment/<%= teacherId %>" method="POST">
+            <div class="mb-4">
+                <label for="time" class="block text-sm font-medium text-gray-700">Appointment Time:</label>
+                <input type="datetime-local" id="time" name="time" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+            <div class="mb-6">
+                <label for="message" class="block text-sm font-medium text-gray-700">Message:</label>
+                <textarea id="message" name="message" rows="4" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
+            </div>
+            <div class="flex items-center justify-center">
+                <button type="submit" class="bg-green-900 hover:bg-green-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                    Book Appointment
+                </button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

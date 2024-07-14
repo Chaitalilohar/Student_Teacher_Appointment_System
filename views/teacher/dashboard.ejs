@@ -1,0 +1,44 @@
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<style>
+    .back-button {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        background-color: #004010; /* Tailwind's blue-500 */
+        color: white;
+        border-radius: 0.375rem; /* Tailwind's rounded-md */
+        text-align: center;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    
+    .back-button:hover {
+        background-color: #014415; /* Tailwind's blue-600 */
+    }
+</style>
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="max-w-xl mx-auto p-6 bg-white rounded-lg shadow-md">
+        <h2 class="text-3xl font-bold text-center mb-4">Teacher Dashboard</h2>
+        <p class="text-center text-lg mb-4">Welcome, <%= teacher.name %>!</p>
+        <div class="flex justify-center space-x-4">
+            <a href="/teacher/appointments"
+                class="bg-green-900 hover:bg-green-800 text-white px-4 py-2 rounded-lg text-center block w-full max-w-xs">View
+                Appointments</a>
+            <a href="/teacher/messages"
+                class="bg-green-900 hover:bg-green-800 text-white px-4 py-2 rounded-lg text-center block w-full max-w-xs">View
+                Messages</a>
+        </div>
+        <div class="container mx-auto p-4 flex justify-center items-center">
+            <!-- Your content here -->
+            <button class="back-button" onclick="goBack()">Go Back</button>
+        </div>
+    
+    </div>
+</body>
+

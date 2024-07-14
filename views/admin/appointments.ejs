@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Appointments</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Custom styles */
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 20px; /* Add padding for better mobile experience */
+        }
+        .back-button-container {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 1000;
+        }
+        .back-button {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: #003803; /* Tailwind's blue-500 */
+            color: white;
+            border-radius: 0.375rem; /* Tailwind's rounded-md */
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .back-button:hover {
+            background-color: #013a08; /* Tailwind's blue-600 */
+        }
+    </style>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</head>
+<body>
+    <div class="back-button-container">
+        <button class="back-button" onclick="goBack()">Go Back</button>
+    </div>
+    <div class="max-w-4xl w-full mx-auto mt-14 p-6 bg-white rounded-lg shadow-md">
+        <h2 class="text-2xl font-bold mb-4 text-center">Manage Appointments</h2>
+
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white rounded-lg shadow-md overflow-hidden">
+                <thead class="bg-green-900 text-white">
+                    <tr>
+                        <th class="px-4 py-2 text-left">Student Name</th>
+                        <th class="px-4 py-2 text-left">Teacher Name</th>
+                        <th class="px-4 py-2 text-left">Time</th>
+                        <th class="px-4 py-2 text-left">Message</th>
+                        <th class="px-4 py-2 text-left">Status</th>
+                        <th class="px-4 py-2 text-left">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="text-center">
+                    <% appointments.forEach(appointment => { %>
+                        <tr class="border-t">
+                            <td class="px-4 py-3"><%= appointment.studentId ? appointment.studentId.name : 'Unknown' %></td>
+                            <td class="px-4 py-3"><%= appointment.teacherId ? appointment.teacherId.name : 'Unknown' %></td>
+                            <td class="px-4 py-3 whitespace-nowrap"><%= appointment.time ? appointment.time.toDateString() : 'Unknown' %></td>
+                            <td class="px-4 py-3"><%= appointment.message %></td>
+                            <td class="px-4 py-3"><%= appointment.status %></td>
+                            <td class="px-4 py-3">
+                                <form action="/admin/appointments/<%= appointment._id %>/update-status" method="POST">
+                                    <select name="status" onchange="this.form.submit()" class="block w-full bg-white border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-green-900">
+                                        <option value="pending" <% if (appointment.status === 'pending') { %> selected <% } %>>Pending</option>
+                                        <option value="approved" <% if (appointment.status === 'approved') { %> selected <% } %>>Approved</option>
+                                        <option value="cancelled" <% if (appointment.status === 'cancelled') { %> selected <% } %>>Cancelled</option>
+                                    </select>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

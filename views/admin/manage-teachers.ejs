@@ -1,0 +1,78 @@
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<style>
+    /* Custom styles */
+    body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f3f4f6;
+        margin: 0;
+    }
+    .back-button-container {
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        z-index: 1000;
+    }
+    .back-button {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        background-color: #003b15; /* Tailwind's blue-500 */
+        color: white;
+        border-radius: 0.375rem; /* Tailwind's rounded-md */
+        text-align: center;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    .back-button:hover {
+        background-color: #013e16; /* Tailwind's blue-600 */
+    }
+</style>
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+<body>
+    <div class="back-button-container">
+        <button class="back-button" onclick="goBack()">Go Back</button>
+    </div>
+<h2 class="text-2xl font-bold mb-4">Manage Teachers</h2>
+
+<div class="overflow-x-auto">
+    <table class="table-auto min-w-full bg-white rounded-lg shadow-md border-collapse">
+        <thead class="bg-green-900 text-white">
+            <tr>
+                <th class="px-4 py-2">Name</th>
+                <th class="px-4 py-2">Department</th>
+                <th class="px-4 py-2">Subject</th>
+                <th class="px-4 py-2">Email</th>
+                <th class="px-4 py-2">Actions</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            <% teachers.forEach(teacher => { %>
+                <tr class="border-t">
+                    <td class="px-4 py-2"><%= teacher.name %></td>
+                    <td class="px-4 py-2"><%= teacher.department %></td>
+                    <td class="px-4 py-2"><%= teacher.subject %></td>
+                    <td class="px-4 py-2"><%= teacher.email %></td>
+                    <td class="px-4 py-2">
+                        <a href="/admin/edit-teacher/<%= teacher._id %>" class="text-blue-500 hover:text-blue-600 mr-2">Edit</a>
+                        <form action="/admin/delete-teacher" method="POST" style="display:inline;">
+                            <input type="hidden" name="teacherId" value="<%= teacher._id %>">
+                            <button type="submit" class="text-red-500 hover:text-red-600">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
